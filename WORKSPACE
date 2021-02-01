@@ -1,4 +1,4 @@
-workspace(name = "com_kerfed")
+workspace(name = "com_github_psigen_rules_go_2805")
 
 load("@bazel_tools//tools/build_defs/repo:http.bzl", "http_archive")
 

@@ -12,10 +12,7 @@ go_library(
     srcs = ["main.go"],
     importpath = "github.com/psigen/bazel-go-issue",
     visibility = ["//visibility:private"],
-    deps = [
-        "@io_temporal_go_sdk//client",
-        "@io_temporal_go_sdk//worker",
-    ],
+    deps = ["@com_github_gogo_status//:status"],
 )
 
 go_binary(

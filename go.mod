@@ -1,5 +1,8 @@
 module github.com/psigen/bazel-go-issue
 
-go 1.15.7
+go 1.15
 
-require go.temporal.io/sdk v1.3.0
+require (
+	github.com/gogo/status v1.1.0
+	google.golang.org/grpc v1.12.0
+)
