@@ -1,0 +1,25 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_binary", "go_library")
+
+##---------------------------------------------------------------------------
+## See: https://github.com/bazelbuild/rules_go#generating-build-files
+load("@bazel_gazelle//:def.bzl", "gazelle")
+
+# gazelle:prefix github.com/psigen/bazel-go-issue
+gazelle(name = "gazelle")
+
+go_library(
+    name = "bazel-go-issue_lib",
+    srcs = ["main.go"],
+    importpath = "github.com/psigen/bazel-go-issue",
+    visibility = ["//visibility:private"],
+    deps = [
+        "@io_temporal_go_sdk//client",
+        "@io_temporal_go_sdk//worker",
+    ],
+)
+
+go_binary(
+    name = "bazel-go-issue",
+    embed = [":bazel-go-issue_lib"],
+    visibility = ["//visibility:public"],
+)
