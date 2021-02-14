@@ -1,4 +1,4 @@
-workspace(name = "com_github_psigen_rules_go_2805")
+workspace(name = "com_github_psigen_bazel_go_issue")
 
 load("@bazel_tools//tools/build_defs/repo:http.bzl", "http_archive")
 

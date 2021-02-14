@@ -1,4 +1,6 @@
 load("@io_bazel_rules_go//go:def.bzl", "go_binary", "go_library")
+load("@rules_proto//proto:defs.bzl", "proto_library")
+load("@io_bazel_rules_go//proto:def.bzl", "go_proto_library")
 
 ##---------------------------------------------------------------------------
 ## See: https://github.com/bazelbuild/rules_go#generating-build-files
@@ -7,13 +9,26 @@ load("@bazel_gazelle//:def.bzl", "gazelle")
 # gazelle:prefix github.com/psigen/bazel-go-issue
 gazelle(name = "gazelle")
 
+proto_library(
+    name = "protos",
+    srcs = ["greeter.proto"],
+)
+
+go_proto_library(
+    name = "greeter",
+    compilers = ["@io_bazel_rules_go//proto:go_grpc"],
+    importpath = "github.com/psigen/bazel-go-issue/proto",
+    proto = ":protos",
+)
+
 go_library(
     name = "bazel-go-issue_lib",
     srcs = ["main.go"],
     importpath = "github.com/psigen/bazel-go-issue",
-    visibility = ["//visibility:private"],
     deps = [
+        ":greeter",
         "@com_github_gogo_status//:status",
+        "@org_golang_google_grpc//:grpc",
         "@org_golang_google_grpc//codes",
     ],
 )
